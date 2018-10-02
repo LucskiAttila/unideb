@@ -1,61 +1,141 @@
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
-#define m2cm 100
-#define in2cm 2.54
-#define ft2in 12
 
-static bool sort_func(double a, double b){
-	return a > b;
-}
 
-int main()
+int main () 
+
 {
-	map<string, int> units;
-	units["cm"] = 1;
-	units["in"] = 2;
-	units["m"] = 3;
-	units["ft"] = 4;
 
-	vector<double> list;
-	double value = 0;
-	string unit = "";
-	while (1) {
-		cin >> value >> unit;
+    double bemenet;
 
-		if (unit == "quit" || value == 0 || unit == "")
-			break;
+    double osszeg=0.0;
 
-		switch(units[unit]){
-			case 1:
-				list.push_back(value);
-				break;
-			case 2:
-				list.push_back(value * (double)in2cm);
-				break;
-			case 3:
-				list.push_back(value * (double)m2cm);
-				break;
-			case 4:
-				list.push_back(value * (double)ft2in * (double)in2cm);
-				break;
-			default:
-				cout << "A mértékegység nem felismerhető!" << endl;
-		}
-	}
+    string egyseg;
 
-	sort(list.begin(), list.end(), sort_func);
-	
-	cout << "Legkisebb: " << *min_element(list.begin(), list.end()) << endl;
-	cout << "Legnagyobb: " << *max_element(list.begin(), list.end()) << endl;
-	cout << "Összeg: " << accumulate(list.begin(), list.end(), 0) << endl;
+    vector<double> ertekek;
 
-	cout << endl << "Kiírás növekvő sorrendben: " << endl;
 
-	bool first = true;
-	for(auto &elem : list){
-		cout << (first ? "" : ", ") << elem << " cm";
-		if (first)
-			first = false;
-	}
-	cout << endl;
+
+    while (cin >> bemenet >> egyseg)
+
+    {
+
+
+
+
+
+        if (egyseg == "m")
+
+
+
+            bemenet=bemenet;
+
+
+
+        else if (egyseg == "cm")
+
+
+
+            bemenet = bemenet/100;
+
+
+
+        else if (egyseg== "in")
+
+
+
+            bemenet = bemenet*0.3048;
+
+
+
+        else if (egyseg == "ft")
+
+
+
+            bemenet=bemenet*0.254;
+
+
+
+        else {
+
+            cout << "Hibas bemeneti ertek.\n";
+
+            }
+
+
+
+        ertekek.push_back(bemenet);
+
+        osszeg +=bemenet;
+
+
+
+    }
+
+
+
+    double min=0;
+
+    
+
+    for(int i=1; i<ertekek.size();++i)
+
+    {
+
+        if(ertekek[i]<ertekek[min])
+
+        {
+
+            min=i;
+
+        }
+
+    }
+
+
+
+    double max=0;
+
+
+
+    for(int i=1; i<ertekek.size();++i)
+
+    {
+
+        if(ertekek[i]>ertekek[max])
+
+        {
+
+            max=i;
+
+        }
+
+    }
+
+
+
+    sort(ertekek);
+
+
+
+    cout << "Az ertekek: ";
+
+
+
+    for (int i = 0; i < ertekek.size(); ++i)
+
+        cout << ertekek[i] << "m, ";
+
+    cout << "\n";
+
+    cout<<"Az osszeg: "<<osszeg<<" m\n";
+
+    cout<<"A legnagyobb ertek: "<<ertekek[max]<<" m\n";
+
+    cout<<"A legkisebb ertek: "<<ertekek[min]<<" m\n";
+
+    
+
+    return 0;
+
 }
