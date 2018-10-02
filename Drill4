@@ -22,7 +22,6 @@ int main()
 	while (1) {
 		cin >> value >> unit;
 
-		// TODO: Megszakítjuk, ha nincs megfelelő érték.
 		if (unit == "quit" || value == 0 || unit == "")
 			break;
 
@@ -44,7 +43,6 @@ int main()
 		}
 	}
 
-	// TODO: Berendezzük csökkenő sorrendbe a tömb elemeit.
 	sort(list.begin(), list.end(), sort_func);
 	
 	cout << "Legkisebb: " << *min_element(list.begin(), list.end()) << endl;
@@ -53,7 +51,6 @@ int main()
 
 	cout << endl << "Kiírás növekvő sorrendben: " << endl;
 
-	// TODO: Kiírjuk az elemeket 'cm' mértékegységben.
 	bool first = true;
 	for(auto &elem : list){
 		cout << (first ? "" : ", ") << elem << " cm";
